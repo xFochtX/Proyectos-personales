@@ -4,8 +4,10 @@ const prisma = new PrismaClient();
 
 export default async function handler(req, res) {
   if(req.method === 'POST'){
-    const { url } = req.body;
-    const shortUrl = Math.random().toString(36).substr(2, 5);
+    const {url} = req.body;
+    const randomCode = Math.random().toString(36).substr(2, 5);
+    // const shortUrl = Math.random().toString(36).substr(2, 5);
+    const shortUrl = `http://localhost:3000/${randomCode}`; // Modificación aquí
     
     try{
       const data = await prisma.link.create({
