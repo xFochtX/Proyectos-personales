@@ -45,6 +45,7 @@ export default function Home() {
       <div className="mt-8 w-full flex justify-center">
         <form onSubmit={handleSubmit} className="flex items-center w-4/5 max-w-2xl p-4 border rounded">
           <input
+            ref={inputRef}
             type="text"
             placeholder="Enter your URL here"
             className="flex-grow p-2 border rounded mr-2"
@@ -52,8 +53,11 @@ export default function Home() {
           <button className="p-2 bg-blue-500 text-white rounded">
             Shorten
           </button>
-          <span className="ml-4">{shortURL}</span>
         </form>
+      </div>
+
+      <div className="mt-4 p-4 bg-gray-100 border rounded w-4/5 max-w-2xl text-center">
+          <p className="text-blue-500 break-all">{shortURL}</p>
       </div>
     </main>
   );

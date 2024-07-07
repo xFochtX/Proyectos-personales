@@ -2,7 +2,7 @@ import {PrismaClient} from "@prisma/client";
 
 const prisma = new PrismaClient();
 
-export default async function handler(req, res) {
+export default async function handler(req, res){
   if(req.method === 'POST'){
     const {url} = req.body;
     const randomCode = Math.random().toString(36).substr(2, 5);
