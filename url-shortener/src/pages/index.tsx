@@ -6,6 +6,7 @@ import {useState, useRef} from 'react';
 export default function Home() {
   const inputRef = useRef<HTMLInputElement>(null);
   const [shortURL, setShortURL] = useState("");
+  
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const currentInput = inputRef.current;
@@ -15,7 +16,7 @@ export default function Home() {
     fetch("/api/shortUrl",{
       method: 'POST',
       headers: {'Content-Type':'application/json',},
-      body: JSON.stringify({url}),
+      body: JSON.stringify({url})
     })
       .then(res => res.json())
       .then((data) => {
@@ -56,9 +57,20 @@ export default function Home() {
         </form>
       </div>
 
-      <div className="mt-4 p-4 bg-gray-100 border rounded w-4/5 max-w-2xl text-center">
-          <p className="text-blue-500 break-all">{shortURL}</p>
-      </div>
+      {shortURL && (
+        <div className="mt-4 p-4 bg-gray-100 border rounded w-4/5 max-w-2xl text-center">
+          <h2 className="text-xl font-semibold mb-2">Shortened URL</h2>
+          <a
+            href={shortURL}
+            target="_blank"  // Abre el enlace en una nueva pestaña
+            rel="noopener noreferrer"  // Buenas prácticas para la seguridad
+            className="text-blue-500 break-all cursor-pointer"
+            style={{ cursor: 'pointer' }} // Cambia el cursor a una mano
+          >
+            {shortURL}
+          </a>
+        </div>
+      )}
     </main>
   );
 }
